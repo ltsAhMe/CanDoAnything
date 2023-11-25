@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CanDoAnything:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CanDoAnything_jar</output-path>
+    <root id="archive" name="CanDoAnything.jar">
+      <element id="module-output" name="CanDoAnything" />
+    </root>
+  </artifact>
+</component>
