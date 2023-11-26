@@ -2,8 +2,7 @@ package org.CDA.commend.Run;
 
 import org.CDA.commend.commendCheck;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -19,8 +18,10 @@ public class runget {
         System.out.println("you can use it to get Run in web or anyway");
         System.out.println("runget \"Name\" to get run");
         System.out.println("\"-webset\" can set get web");
+        System.out.println("\"-file\" get file run");
+        System.out.println("\"-uninstall\" del run");
     }
-    public static void Runtime(String[] args){
+    public static void Runtime(String[] args) throws IOException {
         if (args.length>1){
             switch (args[1]) {
                 case "-webset":
@@ -30,12 +31,43 @@ public class runget {
                         web = args[2];
                     }
                     break;
+                case "-file":
+                        File done1 = new File(args[2]);
+                      copyFile(args[2],commendCheck.pathName+"/"+done1.getName());
+                    commendCheck.setCommends();
+                    break;
+                case "-uninstall":
+                    String Path = commendCheck.pathName+"/"+args[2]+".class";
+                   runget.delFile(Path);
+                    commendCheck.setCommends();
+                   break;
+                case "-update":
+                    commendCheck.setCommends();
+                    break;
                 default:
                     download(args[1]);
+                    commendCheck.setCommends();
+                    break;
             }
         }
     }
+    private static void copyFile(String source, String target) {
+        Path sourcePath = Paths.get(source);
+        Path targetPath = Paths.get(target);
 
+        try {
+            Files.copy(sourcePath, targetPath, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("done");
+            // 在此处添加其他操作，如果需要的话
+        } catch (IOException e) {
+            System.out.println("fuck" + e.getMessage());
+            // 如果需要，可以在此处添加异常处理逻辑
+        }
+    }
+     private static void delFile(String path){
+        File file = new File(path);
+        file.delete();
+     }
     protected static void download(String name) {
         String fileName = name+".class";
         String url = web + "/"+ fileName;
