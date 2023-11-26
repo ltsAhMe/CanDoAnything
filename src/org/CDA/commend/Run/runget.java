@@ -12,7 +12,7 @@ import java.nio.file.StandardCopyOption;
 
 public class runget {
 
-    static String web = "127.0.0.1";
+    static String web = "https://github.com/ltsAhMe/CDYpack/raw/main";
 
     public static void HelpShow(String[] args){
         System.out.println("you can use it to get Run in web or anyway");
